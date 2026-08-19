@@ -98,7 +98,7 @@
 
     .years {
       text-align: center;
-      padding: 30px 20px 70px;
+      padding: 30px 20px 40px;
     }
 
     .years h2 {
@@ -120,10 +120,6 @@
       color: white;
       font-size: 15px;
       cursor: pointer;
-    }
-
-    .year-buttons button:hover {
-      opacity: 0.85;
     }
 
     #semesterSection {
@@ -233,15 +229,15 @@
 
     <div class="year-buttons">
 
-      <button onclick="showSemesters('1st Year')">
+      <button onclick="showSemesters('1st Year', ['Semester 1', 'Semester 2'])">
         1st Year
       </button>
 
-      <button onclick="showSemesters('2nd Year')">
+      <button onclick="showSemesters('2nd Year', ['Semester 3', 'Semester 4'])">
         2nd Year
       </button>
 
-      <button onclick="showSemesters('3rd Year')">
+      <button onclick="showSemesters('3rd Year', ['Semester 5', 'Semester 6'])">
         3rd Year
       </button>
 
@@ -255,17 +251,7 @@
 
     <p id="selectedYear"></p>
 
-    <div class="semester-buttons">
-
-      <button onclick="selectSemester('Semester 1')">
-        Semester 1
-      </button>
-
-      <button onclick="selectSemester('Semester 2')">
-        Semester 2
-      </button>
-
-    </div>
+    <div id="semesterButtons" class="semester-buttons"></div>
 
   </section>
 
@@ -275,20 +261,38 @@
 
   <script>
 
-    function showSemesters(year) {
+    function showSemesters(year, semesters) {
 
-      document.getElementById("semesterSection").style.display = "block";
+      const section = document.getElementById("semesterSection");
+      const selectedYear = document.getElementById("selectedYear");
+      const semesterButtons = document.getElementById("semesterButtons");
 
-      document.getElementById("selectedYear").innerText =
-        "You selected: " + year;
+      section.style.display = "block";
 
-      document.getElementById("semesterSection")
-        .scrollIntoView({ behavior: "smooth" });
+      selectedYear.innerText = "You selected: " + year;
+
+      semesterButtons.innerHTML = "";
+
+      semesters.forEach(function(semester) {
+
+        const button = document.createElement("button");
+
+        button.innerText = semester;
+
+        button.onclick = function() {
+          selectSemester(year, semester);
+        };
+
+        semesterButtons.appendChild(button);
+
+      });
+
+      section.scrollIntoView({ behavior: "smooth" });
     }
 
-    function selectSemester(semester) {
+    function selectSemester(year, semester) {
 
-      alert("You selected " + semester);
+      alert(year + " - " + semester + " selected");
 
     }
 
