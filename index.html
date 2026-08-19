@@ -44,7 +44,7 @@
 
     .hero {
       text-align: center;
-      padding: 70px 20px 45px;
+      padding: 65px 20px 40px;
     }
 
     .badge {
@@ -71,7 +71,7 @@
 
     .features {
       max-width: 1000px;
-      margin: 20px auto 50px;
+      margin: 20px auto 45px;
       padding: 0 20px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -120,6 +120,47 @@
       color: white;
       font-size: 15px;
       cursor: pointer;
+    }
+
+    .year-buttons button:hover {
+      opacity: 0.85;
+    }
+
+    #semesterSection {
+      display: none;
+      max-width: 700px;
+      margin: 0 auto 70px;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    #semesterSection h2 {
+      margin-bottom: 10px;
+    }
+
+    #selectedYear {
+      color: #687386;
+      margin-bottom: 25px;
+    }
+
+    .semester-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .semester-buttons button {
+      padding: 14px 25px;
+      border: 1px solid #d8dde7;
+      background: white;
+      border-radius: 10px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .semester-buttons button:hover {
+      background: #eef2f8;
     }
 
     footer {
@@ -175,7 +216,7 @@
     <div class="card">
       <div style="font-size:32px;">📚</div>
       <h3>Notes & Assignments</h3>
-      <p>Study material and original practice assignments.</p>
+      <p>Original study material and practice assignments.</p>
     </div>
 
     <div class="card">
@@ -191,9 +232,39 @@
     <h2>Choose Your Year</h2>
 
     <div class="year-buttons">
-      <button>1st Year</button>
-      <button>2nd Year</button>
-      <button>3rd Year</button>
+
+      <button onclick="showSemesters('1st Year')">
+        1st Year
+      </button>
+
+      <button onclick="showSemesters('2nd Year')">
+        2nd Year
+      </button>
+
+      <button onclick="showSemesters('3rd Year')">
+        3rd Year
+      </button>
+
+    </div>
+
+  </section>
+
+  <section id="semesterSection">
+
+    <h2>Choose Your Semester</h2>
+
+    <p id="selectedYear"></p>
+
+    <div class="semester-buttons">
+
+      <button onclick="selectSemester('Semester 1')">
+        Semester 1
+      </button>
+
+      <button onclick="selectSemester('Semester 2')">
+        Semester 2
+      </button>
+
     </div>
 
   </section>
@@ -201,6 +272,27 @@
   <footer>
     © 2026 AI UP Polytechnic Assistant Teacher
   </footer>
+
+  <script>
+
+    function showSemesters(year) {
+
+      document.getElementById("semesterSection").style.display = "block";
+
+      document.getElementById("selectedYear").innerText =
+        "You selected: " + year;
+
+      document.getElementById("semesterSection")
+        .scrollIntoView({ behavior: "smooth" });
+    }
+
+    function selectSemester(semester) {
+
+      alert("You selected " + semester);
+
+    }
+
+  </script>
 
 </body>
 </html>
