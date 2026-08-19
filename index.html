@@ -1,21 +1,206 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>AI UP Polytechnic Assistant Teacher</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #ffffff;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .login {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      background: #172033;
+      color: white;
+      font-size: 14px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 70px 20px 45px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #e8eefc;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: #5f6878;
+      line-height: 1.6;
+      font-size: 17px;
+    }
+
+    .features {
+      max-width: 1000px;
+      margin: 20px auto 50px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      text-align: center;
+    }
+
+    .card h3 {
+      margin: 12px 0 8px;
+    }
+
+    .card p {
+      color: #687386;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .years {
+      text-align: center;
+      padding: 30px 20px 70px;
+    }
+
+    .years h2 {
+      margin-bottom: 25px;
+    }
+
+    .year-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .year-buttons button {
+      padding: 15px 25px;
+      border: none;
+      border-radius: 10px;
+      background: #172033;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: white;
+      border-top: 1px solid #e5e7eb;
+      color: #687386;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      h1 {
+        font-size: 29px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <h1>AI UP Polytechnic Assistant Teacher</h1>
 
-  <p>Hindi aur English mein Polytechnic students ke liye AI learning assistant.</p>
+  <header>
+    <div class="logo">🤖 AI Polytechnic Teacher</div>
+    <button class="login">Student Login</button>
+  </header>
 
-  <h2>Choose Your Year</h2>
+  <section class="hero">
 
-  <button>1st Year</button>
-  <button>2nd Year</button>
-  <button>3rd Year</button>
+    <div class="badge">AI Powered • Hindi + English</div>
+
+    <h1>AI UP Polytechnic<br>Assistant Teacher</h1>
+
+    <p>
+      Your personal AI learning assistant for Polytechnic studies.
+      Learn, practice, prepare for exams and understand practicals
+      in Hindi and English.
+    </p>
+
+  </section>
+
+  <section class="features">
+
+    <div class="card">
+      <div style="font-size:32px;">👨‍🏫</div>
+      <h3>AI Teacher</h3>
+      <p>Ask questions and learn topics step-by-step.</p>
+    </div>
+
+    <div class="card">
+      <div style="font-size:32px;">📚</div>
+      <h3>Notes & Assignments</h3>
+      <p>Study material and original practice assignments.</p>
+    </div>
+
+    <div class="card">
+      <div style="font-size:32px;">🧪</div>
+      <h3>Practical Assistant</h3>
+      <p>Understand experiments, procedures and viva questions.</p>
+    </div>
+
+  </section>
+
+  <section class="years">
+
+    <h2>Choose Your Year</h2>
+
+    <div class="year-buttons">
+      <button>1st Year</button>
+      <button>2nd Year</button>
+      <button>3rd Year</button>
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 AI UP Polytechnic Assistant Teacher
+  </footer>
 
 </body>
 </html>
