@@ -101,15 +101,20 @@
       padding: 30px 20px 40px;
     }
 
-    .years h2 {
-      margin-bottom: 25px;
+    .years h2,
+    #semesterSection h2,
+    #branchSection h2 {
+      margin-bottom: 10px;
     }
 
-    .year-buttons {
+    .year-buttons,
+    .semester-buttons,
+    .branch-buttons {
       display: flex;
       justify-content: center;
       gap: 15px;
       flex-wrap: wrap;
+      margin-top: 25px;
     }
 
     .year-buttons button {
@@ -122,32 +127,24 @@
       cursor: pointer;
     }
 
-    #semesterSection {
+    #semesterSection,
+    #branchSection {
       display: none;
-      max-width: 700px;
-      margin: 0 auto 70px;
+      max-width: 850px;
+      margin: 0 auto 50px;
       padding: 30px 20px;
       text-align: center;
     }
 
-    #semesterSection h2 {
-      margin-bottom: 10px;
-    }
-
-    #selectedYear {
+    #selectedYear,
+    #selectedSemester {
       color: #687386;
-      margin-bottom: 25px;
+      margin-top: 8px;
     }
 
-    .semester-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .semester-buttons button {
-      padding: 14px 25px;
+    .semester-buttons button,
+    .branch-buttons button {
+      padding: 14px 20px;
       border: 1px solid #d8dde7;
       background: white;
       border-radius: 10px;
@@ -155,7 +152,8 @@
       cursor: pointer;
     }
 
-    .semester-buttons button:hover {
+    .semester-buttons button:hover,
+    .branch-buttons button:hover {
       background: #eef2f8;
     }
 
@@ -255,11 +253,29 @@
 
   </section>
 
+  <section id="branchSection">
+
+    <h2>Choose Your Branch</h2>
+
+    <p id="selectedSemester"></p>
+
+    <div id="branchButtons" class="branch-buttons"></div>
+
+  </section>
+
   <footer>
     © 2026 AI UP Polytechnic Assistant Teacher
   </footer>
 
   <script>
+
+    const branches = [
+      "Computer Science & Engineering",
+      "Electrical Engineering",
+      "Mechanical Engineering",
+      "Civil Engineering",
+      "Electronics Engineering"
+    ];
 
     function showSemesters(year, semesters) {
 
@@ -273,6 +289,8 @@
 
       semesterButtons.innerHTML = "";
 
+      document.getElementById("branchSection").style.display = "none";
+
       semesters.forEach(function(semester) {
 
         const button = document.createElement("button");
@@ -280,7 +298,7 @@
         button.innerText = semester;
 
         button.onclick = function() {
-          selectSemester(year, semester);
+          showBranches(year, semester);
         };
 
         semesterButtons.appendChild(button);
@@ -290,10 +308,34 @@
       section.scrollIntoView({ behavior: "smooth" });
     }
 
-    function selectSemester(year, semester) {
+    function showBranches(year, semester) {
 
-      alert(year + " - " + semester + " selected");
+      const branchSection = document.getElementById("branchSection");
+      const selectedSemester = document.getElementById("selectedSemester");
+      const branchButtons = document.getElementById("branchButtons");
 
+      branchSection.style.display = "block";
+
+      selectedSemester.innerText =
+        year + " • " + semester;
+
+      branchButtons.innerHTML = "";
+
+      branches.forEach(function(branch) {
+
+        const button = document.createElement("button");
+
+        button.innerText = branch;
+
+        button.onclick = function() {
+          alert(branch + " selected");
+        };
+
+        branchButtons.appendChild(button);
+
+      });
+
+      branchSection.scrollIntoView({ behavior: "smooth" });
     }
 
   </script>
