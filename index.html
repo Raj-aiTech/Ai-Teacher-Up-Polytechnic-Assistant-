@@ -40,6 +40,7 @@
       background: #172033;
       color: white;
       font-size: 14px;
+      cursor: pointer;
     }
 
     .hero {
@@ -103,13 +104,16 @@
 
     .years h2,
     #semesterSection h2,
-    #branchSection h2 {
+    #branchSection h2,
+    #subjectSection h2 {
       margin-bottom: 10px;
     }
 
     .year-buttons,
     .semester-buttons,
-    .branch-buttons {
+    .branch-buttons,
+    .subject-buttons,
+    .option-buttons {
       display: flex;
       justify-content: center;
       gap: 15px;
@@ -128,22 +132,26 @@
     }
 
     #semesterSection,
-    #branchSection {
+    #branchSection,
+    #subjectSection {
       display: none;
-      max-width: 850px;
+      max-width: 900px;
       margin: 0 auto 50px;
       padding: 30px 20px;
       text-align: center;
     }
 
     #selectedYear,
-    #selectedSemester {
+    #selectedSemester,
+    #selectedBranch {
       color: #687386;
       margin-top: 8px;
     }
 
     .semester-buttons button,
-    .branch-buttons button {
+    .branch-buttons button,
+    .subject-buttons button,
+    .option-buttons button {
       padding: 14px 20px;
       border: 1px solid #d8dde7;
       background: white;
@@ -153,8 +161,33 @@
     }
 
     .semester-buttons button:hover,
-    .branch-buttons button:hover {
+    .branch-buttons button:hover,
+    .subject-buttons button:hover,
+    .option-buttons button:hover {
       background: #eef2f8;
+    }
+
+    .subject-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 25px;
+      margin-top: 25px;
+    }
+
+    .subject-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .subject-card p {
+      color: #687386;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .message {
+      color: #687386;
+      margin-top: 20px;
     }
 
     footer {
@@ -263,14 +296,28 @@
 
   </section>
 
+  <section id="subjectSection">
+
+    <h2>Choose Your Subject</h2>
+
+    <p id="selectedBranch"></p>
+
+    <div id="subjectButtons" class="subject-buttons"></div>
+
+  </section>
+
   <footer>
     © 2026 AI UP Polytechnic Assistant Teacher
   </footer>
+
+  <!-- Subject database -->
+  <script src="subjects.js"></script>
 
   <script>
 
     const branches = [
       "Computer Science & Engineering",
+      "Information Technology",
       "Electrical Engineering",
       "Mechanical Engineering",
       "Civil Engineering",
@@ -279,21 +326,30 @@
 
     function showSemesters(year, semesters) {
 
-      const section = document.getElementById("semesterSection");
-      const selectedYear = document.getElementById("selectedYear");
-      const semesterButtons = document.getElementById("semesterButtons");
+      const section =
+        document.getElementById("semesterSection");
+
+      const selectedYear =
+        document.getElementById("selectedYear");
+
+      const semesterButtons =
+        document.getElementById("semesterButtons");
 
       section.style.display = "block";
 
-      selectedYear.innerText = "You selected: " + year;
+      selectedYear.innerText =
+        "You selected: " + year;
 
       semesterButtons.innerHTML = "";
 
       document.getElementById("branchSection").style.display = "none";
 
+      document.getElementById("subjectSection").style.display = "none";
+
       semesters.forEach(function(semester) {
 
-        const button = document.createElement("button");
+        const button =
+          document.createElement("button");
 
         button.innerText = semester;
 
@@ -305,14 +361,22 @@
 
       });
 
-      section.scrollIntoView({ behavior: "smooth" });
+      section.scrollIntoView({
+        behavior: "smooth"
+      });
     }
+
 
     function showBranches(year, semester) {
 
-      const branchSection = document.getElementById("branchSection");
-      const selectedSemester = document.getElementById("selectedSemester");
-      const branchButtons = document.getElementById("branchButtons");
+      const branchSection =
+        document.getElementById("branchSection");
+
+      const selectedSemester =
+        document.getElementById("selectedSemester");
+
+      const branchButtons =
+        document.getElementById("branchButtons");
 
       branchSection.style.display = "block";
 
@@ -321,24 +385,100 @@
 
       branchButtons.innerHTML = "";
 
+      document.getElementById("subjectSection").style.display = "none";
+
       branches.forEach(function(branch) {
 
-        const button = document.createElement("button");
+        const button =
+          document.createElement("button");
 
         button.innerText = branch;
 
         button.onclick = function() {
-          alert(branch + " selected");
+          showSubjects(branch, semester);
         };
 
         branchButtons.appendChild(button);
 
       });
 
-      branchSection.scrollIntoView({ behavior: "smooth" });
+      branchSection.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+
+    function showSubjects(branch, semester) {
+
+      const subjectSection =
+        document.getElementById("subjectSection");
+
+      const selectedBranch =
+        document.getElementById("selectedBranch");
+
+      const subjectButtons =
+        document.getElementById("subjectButtons");
+
+      subjectSection.style.display = "block";
+
+      selectedBranch.innerText =
+        branch + " • " + semester;
+
+      subjectButtons.innerHTML = "";
+
+      const branchData =
+        subjects[branch];
+
+      const semesterData =
+        branchData &&
+        branchData.semesters &&
+        branchData.semesters[semester];
+
+      if (!semesterData ||
+          semesterData.length === 0) {
+
+        subjectButtons.innerHTML =
+          '<p class="message">Subjects will be added soon.</p>';
+
+      } else {
+
+        semesterData.forEach(function(subject) {
+
+          const button =
+            document.createElement("button");
+
+          button.innerText = subject;
+
+          button.onclick = function() {
+            openSubject(subject, branch, semester);
+          };
+
+          subjectButtons.appendChild(button);
+
+        });
+
+      }
+
+      subjectSection.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+
+    function openSubject(subject, branch, semester) {
+
+      alert(
+        subject +
+        "\n\n" +
+        branch +
+        " • " +
+        semester +
+        "\n\nSubject selected successfully."
+      );
+
     }
 
   </script>
-  <script src="subjects.js"></script>
+
 </body>
 </html>
